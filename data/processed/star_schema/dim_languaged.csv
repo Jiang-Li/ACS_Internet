@@ -1,0 +1,23 @@
+LANGUAGED,LANGUAGED_value
+1,English only
+100,English
+200,Spanish
+210,Portuguese
+250,French
+260,German
+310,Polish
+320,Russian
+330,Other Slavic languages
+360,Armenian
+370,Persian
+400,Chinese
+410,Japanese
+420,Korean
+430,Vietnamese
+440,Khmer/Cambodian
+450,Thai
+460,Laotian
+500,Arabic
+510,Hebrew
+600,Other languages
+990,Missing/Unknown

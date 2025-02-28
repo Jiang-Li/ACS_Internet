@@ -1,0 +1,27 @@
+EDUCD,EDUCD_value
+0,N/A
+1,No schooling completed
+2,No schooling completed
+11,Nursery school
+12,Kindergarten
+14,Grade 1
+15,Grade 2
+16,Grade 3
+17,Grade 4
+22,Grade 5
+23,Grade 6
+25,Grade 7
+26,Grade 8
+30,Grade 9
+40,Grade 10
+50,Grade 11
+61,"Grade 12, no diploma"
+63,Regular high school diploma
+64,GED or alternative credential
+65,"Some college, but less than 1 year"
+71,1 year of college
+81,2 years of college
+101,Bachelor's degree
+114,Master's degree
+115,Professional degree beyond bachelor's degree
+116,Doctoral degree

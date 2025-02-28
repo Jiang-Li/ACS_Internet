@@ -1,0 +1,13 @@
+EMPSTATD,EMPSTATD_value
+0,N/A
+10,At work
+12,"Has job, not at work last week"
+14,"Armed forces, at work"
+15,"Armed forces, not at work last week"
+20,"Unemployed, experienced worker"
+21,"Unemployed, new worker"
+30,Not in labor force
+31,"NILF, retired"
+32,"NILF, disabled"
+33,"NILF, other"
+34,"NILF, unable to work"

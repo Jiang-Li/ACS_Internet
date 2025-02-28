@@ -1,0 +1,93 @@
+RACED,RACED_value
+100,White
+200,Black/African American
+300,American Indian/Alaska Native
+302,Apache
+303,Cherokee
+304,Chippewa
+305,Choctaw
+306,Creek
+307,Iroquois
+308,Lumbee
+309,Navajo
+310,Pueblo
+311,Sioux
+315,Other Specified American Indian Tribes
+350,Delaware
+351,Latin American Indian
+352,Puget Sound Salish
+354,Spanish American Indian
+400,Chinese
+410,Chinese and White
+420,Chinese and Black
+500,Japanese
+600,Filipino
+610,Filipino and White
+620,Filipino and Black
+650,Asian Indian
+651,Bengali
+652,Punjabi
+653,Tamil
+660,Korean
+670,Vietnamese
+680,Hmong
+690,Cambodian
+700,Other Asian or Pacific Islander
+800,Two or more major races
+801,White and Black
+802,White and AIAN
+810,White and Asian
+811,White and Chinese
+812,White and Japanese
+813,White and Filipino
+814,White and Asian Indian
+815,White and Korean
+816,White and Vietnamese
+817,White and Asian write_in
+818,White and other Asian race(s)
+819,White and two or more Asian groups
+820,Black and AIAN
+821,Black and Asian
+822,Black and Chinese
+823,Black and Japanese
+824,Black and Filipino
+825,Black and Asian Indian
+826,Black and Korean
+827,Black and Vietnamese
+830,AIAN and Asian
+831,AIAN and Chinese
+832,AIAN and Japanese
+833,AIAN and Filipino
+834,AIAN and Asian Indian
+835,AIAN and Korean
+836,AIAN and Vietnamese
+837,AIAN and Asian write_in
+850,Asian and Pacific Islander
+851,Chinese and Hawaiian
+852,"Chinese, Filipino, Hawaiian"
+853,Japanese and Hawaiian
+854,Filipino and Hawaiian
+855,Asian Indian and Hawaiian
+856,Korean and Hawaiian
+857,Vietnamese and Hawaiian
+858,Other Asian race(s) and Hawaiian
+859,Japanese and Pacific Islander
+860,Filipino and Pacific Islander
+861,Asian Indian and Pacific Islander
+862,Korean and Pacific Islander
+863,Vietnamese and Pacific Islander
+864,Other Asian race(s) and Pacific Islander
+865,Other Asian race(s) and Pacific Islander
+866,Other Asian race(s) and Pacific Islander
+867,Other Asian race(s) and Pacific Islander
+868,Other Asian race(s) and Pacific Islander
+869,Other Asian race(s) and Pacific Islander
+880,AIAN and Pacific Islander
+881,Asian Indian and Pacific Islander
+882,Korean and Pacific Islander
+883,Vietnamese and Pacific Islander
+884,Other Asian race(s) and Pacific Islander
+885,Other Asian race(s) and Pacific Islander
+886,Other Asian race(s) and Pacific Islander
+887,Other Asian race(s) and Pacific Islander
+900,Missing/Unknown
