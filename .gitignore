@@ -8,6 +8,16 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Large data files
+*.csv
+!**/processed/**/*.csv
+data/raw/*.csv
+data/processed/star_schema/fact_acs_2023.csv
+
+# Keep compressed files
+!*.csv.zip
+!*.zip
+
 # Distribution / packaging
 dist/
 build/
@@ -21,6 +31,8 @@ env/
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
 
 # OS
 .DS_Store
