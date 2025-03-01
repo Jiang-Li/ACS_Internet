@@ -1,93 +1,260 @@
-RACED,RACED_value
-100,White
-200,Black/African American
-300,American Indian/Alaska Native
-302,Apache
-303,Cherokee
-304,Chippewa
-305,Choctaw
-306,Creek
-307,Iroquois
-308,Lumbee
-309,Navajo
-310,Pueblo
-311,Sioux
-315,Other Specified American Indian Tribes
-350,Delaware
-351,Latin American Indian
-352,Puget Sound Salish
-354,Spanish American Indian
-400,Chinese
-410,Chinese and White
-420,Chinese and Black
-500,Japanese
-600,Filipino
-610,Filipino and White
-620,Filipino and Black
-650,Asian Indian
-651,Bengali
-652,Punjabi
-653,Tamil
-660,Korean
-670,Vietnamese
-680,Hmong
-690,Cambodian
-700,Other Asian or Pacific Islander
-800,Two or more major races
-801,White and Black
-802,White and AIAN
-810,White and Asian
-811,White and Chinese
-812,White and Japanese
-813,White and Filipino
-814,White and Asian Indian
-815,White and Korean
-816,White and Vietnamese
-817,White and Asian write_in
-818,White and other Asian race(s)
-819,White and two or more Asian groups
-820,Black and AIAN
-821,Black and Asian
-822,Black and Chinese
-823,Black and Japanese
-824,Black and Filipino
-825,Black and Asian Indian
-826,Black and Korean
-827,Black and Vietnamese
-830,AIAN and Asian
-831,AIAN and Chinese
-832,AIAN and Japanese
-833,AIAN and Filipino
-834,AIAN and Asian Indian
-835,AIAN and Korean
-836,AIAN and Vietnamese
-837,AIAN and Asian write_in
-850,Asian and Pacific Islander
-851,Chinese and Hawaiian
-852,"Chinese, Filipino, Hawaiian"
-853,Japanese and Hawaiian
-854,Filipino and Hawaiian
-855,Asian Indian and Hawaiian
-856,Korean and Hawaiian
-857,Vietnamese and Hawaiian
-858,Other Asian race(s) and Hawaiian
-859,Japanese and Pacific Islander
-860,Filipino and Pacific Islander
-861,Asian Indian and Pacific Islander
-862,Korean and Pacific Islander
-863,Vietnamese and Pacific Islander
-864,Other Asian race(s) and Pacific Islander
-865,Other Asian race(s) and Pacific Islander
-866,Other Asian race(s) and Pacific Islander
-867,Other Asian race(s) and Pacific Islander
-868,Other Asian race(s) and Pacific Islander
-869,Other Asian race(s) and Pacific Islander
-880,AIAN and Pacific Islander
-881,Asian Indian and Pacific Islander
-882,Korean and Pacific Islander
-883,Vietnamese and Pacific Islander
-884,Other Asian race(s) and Pacific Islander
-885,Other Asian race(s) and Pacific Islander
-886,Other Asian race(s) and Pacific Islander
-887,Other Asian race(s) and Pacific Islander
-900,Missing/Unknown
+RACED,RACED_value,RACED_desc
+100,White,Race [detailed version]
+110,Spanish write_in,Race [detailed version]
+120,Blank (white) (1850),Race [detailed version]
+130,Portuguese,Race [detailed version]
+140,Mexican (1930),Race [detailed version]
+150,Puerto Rican (1910 Hawaii),Race [detailed version]
+200,Black/African American,Race [detailed version]
+210,Mulatto,Race [detailed version]
+300,American Indian/Alaska Native,Race [detailed version]
+302,Apache,Race [detailed version]
+303,Blackfoot,Race [detailed version]
+304,Cherokee,Race [detailed version]
+305,Cheyenne,Race [detailed version]
+306,Chickasaw,Race [detailed version]
+307,Chippewa,Race [detailed version]
+308,Choctaw,Race [detailed version]
+309,Comanche,Race [detailed version]
+310,Creek,Race [detailed version]
+311,Crow,Race [detailed version]
+312,Iroquois,Race [detailed version]
+313,Kiowa,Race [detailed version]
+314,Lumbee,Race [detailed version]
+315,Navajo,Race [detailed version]
+316,Osage,Race [detailed version]
+317,Paiute,Race [detailed version]
+318,Pima,Race [detailed version]
+319,Potawatomi,Race [detailed version]
+320,Pueblo,Race [detailed version]
+321,Seminole,Race [detailed version]
+322,Shoshone,Race [detailed version]
+323,Sioux,Race [detailed version]
+324,"Tlingit (Tlingit_Haida, 2000/ACS)",Race [detailed version]
+325,Tohono O Odham,Race [detailed version]
+326,All other tribes (1990),Race [detailed version]
+328,Hopi,Race [detailed version]
+329,Central American Indian,Race [detailed version]
+330,Spanish American Indian,Race [detailed version]
+340,Aztec,Race [detailed version]
+341,Inca,Race [detailed version]
+342,Maya,Race [detailed version]
+343,Mixtec,Race [detailed version]
+344,Taino,Race [detailed version]
+345,Tarasco (Purepecha),Race [detailed version]
+350,Delaware,Race [detailed version]
+351,Latin American Indian,Race [detailed version]
+352,Puget Sound Salish,Race [detailed version]
+353,Yakama,Race [detailed version]
+354,Yaqui,Race [detailed version]
+355,Colville,Race [detailed version]
+356,Houma,Race [detailed version]
+357,Menominee,Race [detailed version]
+358,Yuman,Race [detailed version]
+359,South American Indian,Race [detailed version]
+360,Mexican American Indian,Race [detailed version]
+361,"Other Amer. Indian tribe (2000,ACS)",Race [detailed version]
+362,"2+ Amer. Indian tribes (2000,ACS)",Race [detailed version]
+363,"American Indian alone, not specified",Race [detailed version]
+364,All other Latin American Indian alone,Race [detailed version]
+370,Alaskan Athabaskan,Race [detailed version]
+371,Aleut,Race [detailed version]
+372,Eskimo,Race [detailed version]
+373,Alaskan mixed,Race [detailed version]
+374,Inupiat,Race [detailed version]
+375,Yup'ik,Race [detailed version]
+379,"Other Alaska Native tribe(s) (2000,ACS)",Race [detailed version]
+380,"Alaska Native alone, not specified",Race [detailed version]
+381,Alaska Native tribes and villages alone,Race [detailed version]
+398,"Both Am. Ind. and Alaska Native (2000,ACS)",Race [detailed version]
+399,Tribe not specified,Race [detailed version]
+400,Chinese,Race [detailed version]
+410,Taiwanese,Race [detailed version]
+420,Chinese and Taiwanese,Race [detailed version]
+500,Japanese,Race [detailed version]
+600,Filipino,Race [detailed version]
+610,Asian Indian (Hindu 1920_1940),Race [detailed version]
+620,Korean,Race [detailed version]
+630,Hawaiian,Race [detailed version]
+631,"Hawaiian and Asian (1900,1920)",Race [detailed version]
+632,"Hawaiian and European (1900,1920)",Race [detailed version]
+634,Hawaiian mixed,Race [detailed version]
+640,Vietnamese,Race [detailed version]
+641,Bhutanese,Race [detailed version]
+642,Mongolian,Race [detailed version]
+643,Nepalese,Race [detailed version]
+650,"Other Asian or Pacific Islander (1920,1980)",Race [detailed version]
+651,Asian only (CPS),Race [detailed version]
+652,Pacific Islander only (CPS),Race [detailed version]
+653,"Asian or Pacific Islander, n.s. (1990 Internal Census files)",Race [detailed version]
+656,Mien,Race [detailed version]
+657,Sikh,Race [detailed version]
+658,Kazakh,Race [detailed version]
+659,Uzbek,Race [detailed version]
+660,Cambodian,Race [detailed version]
+661,Hmong,Race [detailed version]
+662,Laotian,Race [detailed version]
+663,Thai,Race [detailed version]
+664,Bangladeshi,Race [detailed version]
+665,Burmese,Race [detailed version]
+666,Indonesian,Race [detailed version]
+667,Malaysian,Race [detailed version]
+668,Okinawan,Race [detailed version]
+669,Pakistani,Race [detailed version]
+670,Sri Lankan,Race [detailed version]
+671,"Other Asian, n.e.c.",Race [detailed version]
+672,"Asian, not specified",Race [detailed version]
+673,Chinese and Japanese,Race [detailed version]
+674,Chinese and Filipino,Race [detailed version]
+675,Chinese and Vietnamese,Race [detailed version]
+676,Chinese and Asian write_in,Race [detailed version]
+677,Japanese and Filipino,Race [detailed version]
+678,Asian Indian and Asian write_in,Race [detailed version]
+679,Other Asian race combinations,Race [detailed version]
+680,Samoan,Race [detailed version]
+681,Tahitian,Race [detailed version]
+682,Tongan,Race [detailed version]
+683,Other Polynesian (1990),Race [detailed version]
+684,"1+ other Polynesian races (2000,ACS)",Race [detailed version]
+685,Chamorro,Race [detailed version]
+686,Northern Mariana Islander,Race [detailed version]
+687,Palauan,Race [detailed version]
+688,Other Micronesian (1990),Race [detailed version]
+689,"1+ other Micronesian races (2000,ACS)",Race [detailed version]
+690,Chuukese,Race [detailed version]
+691,Guamanian,Race [detailed version]
+692,Marshallese,Race [detailed version]
+695,Fijian,Race [detailed version]
+696,Other Melanesian (1990),Race [detailed version]
+697,"1+ other Melanesian races (2000,ACS)",Race [detailed version]
+698,2+ PI races from 2+ PI regions,Race [detailed version]
+699,"Pacific Islander, n.s.",Race [detailed version]
+700,"Other race, n.e.c.",Race [detailed version]
+801,White and Black,Race [detailed version]
+802,White and AIAN,Race [detailed version]
+810,White and Asian,Race [detailed version]
+811,White and Chinese,Race [detailed version]
+812,White and Japanese,Race [detailed version]
+813,White and Filipino,Race [detailed version]
+814,White and Asian Indian,Race [detailed version]
+815,White and Korean,Race [detailed version]
+816,White and Vietnamese,Race [detailed version]
+817,White and Asian write_in,Race [detailed version]
+818,White and other Asian race(s),Race [detailed version]
+819,White and two or more Asian groups,Race [detailed version]
+820,White and PI,Race [detailed version]
+821,White and Native Hawaiian,Race [detailed version]
+822,White and Samoan,Race [detailed version]
+823,White and Chamorro,Race [detailed version]
+824,White and PI write_in,Race [detailed version]
+825,White and other PI race(s),Race [detailed version]
+826,White and other race write_in,Race [detailed version]
+827,"White and other race, n.e.c.",Race [detailed version]
+830,Black and AIAN,Race [detailed version]
+831,Black and Asian,Race [detailed version]
+832,Black and Chinese,Race [detailed version]
+833,Black and Japanese,Race [detailed version]
+834,Black and Filipino,Race [detailed version]
+835,Black and Asian Indian,Race [detailed version]
+836,Black and Korean,Race [detailed version]
+837,Black and Asian write_in,Race [detailed version]
+838,Black and other Asian race(s),Race [detailed version]
+840,Black and PI,Race [detailed version]
+841,Black and PI write_in,Race [detailed version]
+842,Black and other PI race(s),Race [detailed version]
+845,Black and other race write_in,Race [detailed version]
+850,AIAN and Asian,Race [detailed version]
+851,AIAN and Filipino (2000 1%),Race [detailed version]
+852,AIAN and Asian Indian,Race [detailed version]
+853,AIAN and Asian write_in (2000 1%),Race [detailed version]
+854,AIAN and other Asian race(s),Race [detailed version]
+855,AIAN and PI,Race [detailed version]
+856,AIAN and other race write_in,Race [detailed version]
+860,Asian and PI,Race [detailed version]
+861,Chinese and Hawaiian,Race [detailed version]
+862,"Chinese, Filipino, Hawaiian (2000 1%)",Race [detailed version]
+863,Japanese and Hawaiian (2000 1%),Race [detailed version]
+864,Filipino and Hawaiian,Race [detailed version]
+865,Filipino and PI write_in,Race [detailed version]
+866,Asian Indian and PI write_in (2000 1%),Race [detailed version]
+867,Asian write_in and PI write_in,Race [detailed version]
+868,Other Asian race(s) and PI race(s),Race [detailed version]
+869,Japanese and Korean (ACS),Race [detailed version]
+880,Asian and other race write_in,Race [detailed version]
+881,Chinese and other race write_in,Race [detailed version]
+882,Japanese and other race write_in,Race [detailed version]
+883,Filipino and other race write_in,Race [detailed version]
+884,Asian Indian and other race write_in,Race [detailed version]
+885,Asian write_in and other race write_in,Race [detailed version]
+886,Other Asian race(s) and other race write_in,Race [detailed version]
+887,Chinese and Korean,Race [detailed version]
+890,PI and other race write_in:,Race [detailed version]
+891,PI write_in and other race write_in,Race [detailed version]
+892,Other PI race(s) and other race write_in,Race [detailed version]
+893,Native Hawaiian or PI other race(s),Race [detailed version]
+899,API and other race write_in,Race [detailed version]
+901,"White, Black, AIAN",Race [detailed version]
+902,"White, Black, Asian",Race [detailed version]
+903,"White, Black, PI",Race [detailed version]
+904,"White, Black, other race write_in",Race [detailed version]
+905,"White, AIAN, Asian",Race [detailed version]
+906,"White, AIAN, PI",Race [detailed version]
+907,"White, AIAN, other race write_in",Race [detailed version]
+910,"White, Asian, PI",Race [detailed version]
+911,"White, Chinese, Hawaiian",Race [detailed version]
+912,"White, Chinese, Filipino, Hawaiian (2000 1%)",Race [detailed version]
+913,"White, Japanese, Hawaiian (2000 1%)",Race [detailed version]
+914,"White, Filipino, Hawaiian",Race [detailed version]
+915,"Other White, Asian race(s), PI race(s)",Race [detailed version]
+916,"White, AIAN and Filipino",Race [detailed version]
+917,"White, Black, and Filipino",Race [detailed version]
+920,"White, Asian, other race write_in",Race [detailed version]
+921,"White, Filipino, other race write_in (2000 1%)",Race [detailed version]
+922,"White, Asian write_in, other race write_in (2000 1%)",Race [detailed version]
+923,"Other White, Asian race(s), other race write_in (2000 1%)",Race [detailed version]
+925,"White, PI, other race write_in",Race [detailed version]
+926,White and Japanese and Native Hawaiian and Pacific Islander,Race [detailed version]
+927,White and Asian and Native Hawaiian and Pacific Islander,Race [detailed version]
+930,"Black, AIAN, Asian",Race [detailed version]
+931,"Black, AIAN, PI",Race [detailed version]
+932,"Black, AIAN, other race write_in",Race [detailed version]
+933,"Black, Asian, PI",Race [detailed version]
+934,"Black, Asian, other race write_in",Race [detailed version]
+935,"Black, PI, other race write_in",Race [detailed version]
+936,Black and Native Hawaiian and Other Pacific Islander,Race [detailed version]
+940,"AIAN, Asian, PI",Race [detailed version]
+941,"AIAN, Asian, other race write_in",Race [detailed version]
+942,"AIAN, PI, other race write_in",Race [detailed version]
+943,"Asian, PI, other race write_in",Race [detailed version]
+944,"Asian (Chinese, Japanese, Korean, Vietnamese); and Native Hawaiian or PI; and Other",Race [detailed version]
+949,2 or 3 races (CPS),Race [detailed version]
+950,"White, Black, AIAN, Asian",Race [detailed version]
+951,"White, Black, AIAN, PI",Race [detailed version]
+952,"White, Black, AIAN, other race write_in",Race [detailed version]
+953,"White, Black, Asian, PI",Race [detailed version]
+954,"White, Black, Asian, other race write_in",Race [detailed version]
+955,"White, Black, PI, other race write_in",Race [detailed version]
+960,"White, AIAN, Asian, PI",Race [detailed version]
+961,"White, AIAN, Asian, other race write_in",Race [detailed version]
+962,"White, AIAN, PI, other race write_in",Race [detailed version]
+963,"White, Asian, PI, other race write_in",Race [detailed version]
+964,"White, Chinese, Japanese, Native Hawaiian",Race [detailed version]
+970,"Black, AIAN, Asian, PI",Race [detailed version]
+971,"Black, AIAN, Asian, other race write_in",Race [detailed version]
+972,"Black, AIAN, PI, other race write_in",Race [detailed version]
+973,"Black, Asian, PI, other race write_in",Race [detailed version]
+974,"AIAN, Asian, PI, other race write_in",Race [detailed version]
+975,"AIAN, Asian, PI, Hawaiian other race write_in",Race [detailed version]
+976,"Two specified Asian  (Chinese and other Asian, Chinese and Japanese, Japanese and other Asian, Korean and other Asian); Native Hawaiian/PI; and Other Race",Race [detailed version]
+980,"White, Black, AIAN, Asian, PI",Race [detailed version]
+981,"White, Black, AIAN, Asian, other race write_in",Race [detailed version]
+982,"White, Black, AIAN, PI, other race write_in",Race [detailed version]
+983,"White, Black, Asian, PI, other race write_in",Race [detailed version]
+984,"White, AIAN, Asian, PI, other race write_in",Race [detailed version]
+985,"Black, AIAN, Asian, PI, other race write_in",Race [detailed version]
+986,"Black, AIAN, Asian, PI, Hawaiian, other race write_in",Race [detailed version]
+989,4 or 5 races (CPS),Race [detailed version]
+990,"White, Black, AIAN, Asian, PI, other race write_in",Race [detailed version]
+991,White race; Some other race; Black or African American race and/or American Indian and Alaska Native race and/or Asian groups and/or Native Hawaiian and Other Pacific Islander groups,Race [detailed version]
+996,"2+ races, n.e.c. (CPS)",Race [detailed version]
+997,Unknown,Race [detailed version]

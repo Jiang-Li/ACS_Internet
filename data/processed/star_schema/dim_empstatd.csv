@@ -1,13 +1,17 @@
-EMPSTATD,EMPSTATD_value
-0,N/A
-10,At work
-12,"Has job, not at work last week"
-14,"Armed forces, at work"
-15,"Armed forces, not at work last week"
-20,"Unemployed, experienced worker"
-21,"Unemployed, new worker"
-30,Not in labor force
-31,"NILF, retired"
-32,"NILF, disabled"
-33,"NILF, other"
-34,"NILF, unable to work"
+EMPSTATD,EMPSTATD_value,EMPSTATD_desc
+0,N/A,Employment status [detailed version]
+10,At work,Employment status [detailed version]
+11,"At work, public emerg",Employment status [detailed version]
+12,"Has job, not working",Employment status [detailed version]
+13,Armed forces,Employment status [detailed version]
+14,Armed forces--at work,Employment status [detailed version]
+15,Armed forces--not at work but with job,Employment status [detailed version]
+20,Unemployed,Employment status [detailed version]
+21,"Unemp, exper worker",Employment status [detailed version]
+22,"Unemp, new worker",Employment status [detailed version]
+30,Not in Labor Force,Employment status [detailed version]
+31,"NILF, housework",Employment status [detailed version]
+32,"NILF, unable to work",Employment status [detailed version]
+33,"NILF, school",Employment status [detailed version]
+34,"NILF, other",Employment status [detailed version]
+99,Unknown/Illegible,Employment status [detailed version]

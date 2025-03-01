@@ -1,52 +1,63 @@
-STATEFIP,STATEFIP_value
-1,Alabama
-2,Alaska
-4,Arizona
-5,Arkansas
-6,California
-8,Colorado
-9,Connecticut
-10,Delaware
-11,District of Columbia
-12,Florida
-13,Georgia
-15,Hawaii
-16,Idaho
-17,Illinois
-18,Indiana
-19,Iowa
-20,Kansas
-21,Kentucky
-22,Louisiana
-23,Maine
-24,Maryland
-25,Massachusetts
-26,Michigan
-27,Minnesota
-28,Mississippi
-29,Missouri
-30,Montana
-31,Nebraska
-32,Nevada
-33,New Hampshire
-34,New Jersey
-35,New Mexico
-36,New York
-37,North Carolina
-38,North Dakota
-39,Ohio
-40,Oklahoma
-41,Oregon
-42,Pennsylvania
-44,Rhode Island
-45,South Carolina
-46,South Dakota
-47,Tennessee
-48,Texas
-49,Utah
-50,Vermont
-51,Virginia
-53,Washington
-54,West Virginia
-55,Wisconsin
-56,Wyoming
+STATEFIP,STATEFIP_value,STATEFIP_desc
+1,Alabama,State (FIPS code)
+2,Alaska,State (FIPS code)
+4,Arizona,State (FIPS code)
+5,Arkansas,State (FIPS code)
+6,California,State (FIPS code)
+8,Colorado,State (FIPS code)
+9,Connecticut,State (FIPS code)
+10,Delaware,State (FIPS code)
+11,District of Columbia,State (FIPS code)
+12,Florida,State (FIPS code)
+13,Georgia,State (FIPS code)
+15,Hawaii,State (FIPS code)
+16,Idaho,State (FIPS code)
+17,Illinois,State (FIPS code)
+18,Indiana,State (FIPS code)
+19,Iowa,State (FIPS code)
+20,Kansas,State (FIPS code)
+21,Kentucky,State (FIPS code)
+22,Louisiana,State (FIPS code)
+23,Maine,State (FIPS code)
+24,Maryland,State (FIPS code)
+25,Massachusetts,State (FIPS code)
+26,Michigan,State (FIPS code)
+27,Minnesota,State (FIPS code)
+28,Mississippi,State (FIPS code)
+29,Missouri,State (FIPS code)
+30,Montana,State (FIPS code)
+31,Nebraska,State (FIPS code)
+32,Nevada,State (FIPS code)
+33,New Hampshire,State (FIPS code)
+34,New Jersey,State (FIPS code)
+35,New Mexico,State (FIPS code)
+36,New York,State (FIPS code)
+37,North Carolina,State (FIPS code)
+38,North Dakota,State (FIPS code)
+39,Ohio,State (FIPS code)
+40,Oklahoma,State (FIPS code)
+41,Oregon,State (FIPS code)
+42,Pennsylvania,State (FIPS code)
+44,Rhode Island,State (FIPS code)
+45,South Carolina,State (FIPS code)
+46,South Dakota,State (FIPS code)
+47,Tennessee,State (FIPS code)
+48,Texas,State (FIPS code)
+49,Utah,State (FIPS code)
+50,Vermont,State (FIPS code)
+51,Virginia,State (FIPS code)
+53,Washington,State (FIPS code)
+54,West Virginia,State (FIPS code)
+55,Wisconsin,State (FIPS code)
+56,Wyoming,State (FIPS code)
+61,Maine-New Hampshire-Vermont,State (FIPS code)
+62,Massachusetts-Rhode Island,State (FIPS code)
+63,Minnesota-Iowa-Missouri-Kansas-Nebraska-S.Dakota-N.Dakota,State (FIPS code)
+64,Maryland-Delaware,State (FIPS code)
+65,Montana-Idaho-Wyoming,State (FIPS code)
+66,Utah-Nevada,State (FIPS code)
+67,Arizona-New Mexico,State (FIPS code)
+68,Alaska-Hawaii,State (FIPS code)
+72,Puerto Rico,State (FIPS code)
+97,Military/Mil. Reservation,State (FIPS code)
+99,State not identified,State (FIPS code)

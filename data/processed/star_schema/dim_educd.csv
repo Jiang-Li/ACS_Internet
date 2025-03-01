@@ -1,27 +1,45 @@
-EDUCD,EDUCD_value
-0,N/A
-1,No schooling completed
-2,No schooling completed
-11,Nursery school
-12,Kindergarten
-14,Grade 1
-15,Grade 2
-16,Grade 3
-17,Grade 4
-22,Grade 5
-23,Grade 6
-25,Grade 7
-26,Grade 8
-30,Grade 9
-40,Grade 10
-50,Grade 11
-61,"Grade 12, no diploma"
-63,Regular high school diploma
-64,GED or alternative credential
-65,"Some college, but less than 1 year"
-71,1 year of college
-81,2 years of college
-101,Bachelor's degree
-114,Master's degree
-115,Professional degree beyond bachelor's degree
-116,Doctoral degree
+EDUCD,EDUCD_value,EDUCD_desc
+0,N/A or no schooling,Educational attainment [detailed version]
+1,N/A,Educational attainment [detailed version]
+2,No schooling completed,Educational attainment [detailed version]
+10,Nursery school to grade 4,Educational attainment [detailed version]
+11,"Nursery school, preschool",Educational attainment [detailed version]
+12,Kindergarten,Educational attainment [detailed version]
+13,"Grade 1, 2, 3, or 4",Educational attainment [detailed version]
+14,Grade 1,Educational attainment [detailed version]
+15,Grade 2,Educational attainment [detailed version]
+16,Grade 3,Educational attainment [detailed version]
+17,Grade 4,Educational attainment [detailed version]
+20,"Grade 5, 6, 7, or 8",Educational attainment [detailed version]
+21,Grade 5 or 6,Educational attainment [detailed version]
+22,Grade 5,Educational attainment [detailed version]
+23,Grade 6,Educational attainment [detailed version]
+24,Grade 7 or 8,Educational attainment [detailed version]
+25,Grade 7,Educational attainment [detailed version]
+26,Grade 8,Educational attainment [detailed version]
+30,Grade 9,Educational attainment [detailed version]
+40,Grade 10,Educational attainment [detailed version]
+50,Grade 11,Educational attainment [detailed version]
+60,Grade 12,Educational attainment [detailed version]
+61,"12th grade, no diploma",Educational attainment [detailed version]
+62,High school graduate or GED,Educational attainment [detailed version]
+63,Regular high school diploma,Educational attainment [detailed version]
+64,GED or alternative credential,Educational attainment [detailed version]
+65,"Some college, but less than 1 year",Educational attainment [detailed version]
+70,1 year of college,Educational attainment [detailed version]
+71,"1 or more years of college credit, no degree",Educational attainment [detailed version]
+80,2 years of college,Educational attainment [detailed version]
+81,"Associate's degree, type not specified",Educational attainment [detailed version]
+82,"Associate's degree, occupational program",Educational attainment [detailed version]
+83,"Associate's degree, academic program",Educational attainment [detailed version]
+90,3 years of college,Educational attainment [detailed version]
+100,4 years of college,Educational attainment [detailed version]
+101,Bachelor's degree,Educational attainment [detailed version]
+110,5+ years of college,Educational attainment [detailed version]
+111,6 years of college (6+ in 1960-1970),Educational attainment [detailed version]
+112,7 years of college,Educational attainment [detailed version]
+113,8+ years of college,Educational attainment [detailed version]
+114,Master's degree,Educational attainment [detailed version]
+115,Professional degree beyond a bachelor's degree,Educational attainment [detailed version]
+116,Doctoral degree,Educational attainment [detailed version]
+999,Missing,Educational attainment [detailed version]

@@ -1,9 +1,9 @@
 Internet and Smartphone Access Analysis Report
-Generated on: 2025-02-28 18:14:29
+Generated on: 2025-02-28 20:00:51
 ================================================================================
 
 Reading tables...
-Loading data from: /home/jiang/work/InternetACSData/star_schema
+Loading data from: /home/jiang/work/InternetACSData/data/processed/star_schema
 Successfully loaded 3,405,809 records
 
 Calculating internet and smartphone access by state...
@@ -75,7 +75,7 @@ Education Level                           Internet %   Smartphone %     Populati
 Nursery school to grade 4                      95.7%          96.7%          26,419,547
 2 years of college                             94.6%          94.2%          22,235,637
 N/A or no schooling                            93.0%          94.2%          22,466,482
-Grade 5-8                                      92.1%          93.2%          22,225,893
+Grade 5, 6, 7, or 8                            92.1%          93.2%          22,225,893
 Grade 9                                        90.1%          91.4%           7,048,772
 1 year of college                              89.4%          89.8%          35,769,205
 Grade 11                                       89.2%          90.0%           8,204,360
