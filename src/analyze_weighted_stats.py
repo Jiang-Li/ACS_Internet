@@ -1,256 +1,357 @@
 """
-Analyze internet and device access patterns from ACS data.
-This script calculates weighted statistics for internet and smartphone access
-by state and education level.
+Analyze internet access patterns across demographic dimensions from ACS data.
+This script calculates weighted statistics for internet access by various 
+demographic, geographic, and socioeconomic factors.
 """
 
 import pandas as pd
 import numpy as np
 from pathlib import Path
+import logging
+import matplotlib.pyplot as plt
+import seaborn as sns
 from datetime import datetime
-import os
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
 # Get the project root directory (1 level up from this script)
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-class TechnologyAccessAnalyzer:
-    def __init__(self, data_dir=None):
-        """Initialize the analyzer.
-        
-        Args:
-            data_dir (str): Directory containing the star schema data
-        """
-        if data_dir is None:
-            data_dir = PROJECT_ROOT / 'data/processed/star_schema'
-        self.data_dir = Path(data_dir)
-        self.fact_df = None
-        self.state_dim = None
-        self.educ_dim = None
-        self.results_dir = PROJECT_ROOT / 'results'
-        self.report_lines = []  # Store report lines for later saving
-        
-        # Ensure directories exist
-        self.results_dir.mkdir(exist_ok=True)
-        
-    def log(self, message, print_to_console=True):
-        """Log a message to both console and report.
-        
-        Args:
-            message (str): Message to log
-            print_to_console (bool): Whether to print to console
-        """
-        self.report_lines.append(message)
-        if print_to_console:
-            print(message)
+def create_income_buckets(income_data):
+    """Create income buckets using a combination of quantiles and manual ranges.
     
-    def load_data(self):
-        """Load the necessary tables from the star schema."""
-        self.log("Reading tables...")
-        self.log(f"Loading data from: {self.data_dir}")
+    Args:
+        income_data (pd.Series): Series containing income values
         
-        try:
-            # Read the fact table from ZIP file
-            self.fact_df = pd.read_csv(
-                self.data_dir / 'fact_acs_2023.csv.zip',
-                compression={'method': 'zip', 'archive_name': 'fact_acs_2023.csv'}
+    Returns:
+        pd.Series: Categorical series with income buckets
+    """
+    # Handle negative and zero incomes separately
+    income_data = income_data.copy()
+    income_data = income_data.clip(lower=0)
+    
+    # Define quantiles for positive incomes
+    n_quantiles = 7  # Number of buckets for positive incomes
+    
+    try:
+        # Create buckets for positive incomes
+        positive_mask = income_data > 0
+        if positive_mask.any():
+            buckets = pd.qcut(
+                income_data[positive_mask],
+                q=n_quantiles,
+                labels=[
+                    'Very Low Income',
+                    'Low Income',
+                    'Lower Middle',
+                    'Middle',
+                    'Upper Middle',
+                    'High',
+                    'Very High'
+                ],
+                duplicates='drop'
             )
-            self.state_dim = pd.read_csv(self.data_dir / 'dim_statefip.csv')
-            self.educ_dim = pd.read_csv(self.data_dir / 'dim_educ.csv')
             
-            # Filter out missing values
-            self.valid_internet = self.fact_df[self.fact_df['CINETHH'] != 9]
-            self.valid_smartphone = self.fact_df[self.fact_df['CISMRTPHN'] != 9]
+            # Create final series with both zero and positive incomes
+            result = pd.Series(index=income_data.index, dtype='category')
+            result[income_data == 0] = 'No Income'
+            result[positive_mask] = buckets
             
-            self.log(f"Successfully loaded {len(self.fact_df):,} records")
-        except Exception as e:
-            self.log(f"Error loading data: {str(e)}")
-            raise
-    
-    @staticmethod
-    def calculate_weighted_percentage(df, weight_col, condition_col, condition_value=1):
-        """Calculate weighted percentage for a given condition.
-        
-        Args:
-            df (pd.DataFrame): DataFrame containing the data
-            weight_col (str): Name of the weight column
-            condition_col (str): Name of the condition column
-            condition_value (int): Value to calculate percentage for
+            return result
+        else:
+            return pd.Series('No Income', index=income_data.index)
             
-        Returns:
-            float: Weighted percentage
-        """
-        total_weight = df[weight_col].sum()
-        if total_weight == 0:
-            return 0
-        condition_weight = df[df[condition_col] == condition_value][weight_col].sum()
-        return (condition_weight / total_weight * 100)
+    except Exception as e:
+        logging.error(f"Error creating income buckets: {str(e)}")
+        # Fallback to simpler bucketing if the above fails
+        return pd.cut(
+            income_data,
+            bins=[-np.inf, 0, 20000, 40000, 60000, 100000, np.inf],
+            labels=['No Income', 'Very Low', 'Low', 'Middle', 'High', 'Very High']
+        )
+
+def load_and_prepare_data(data_dir=None):
+    """Load and prepare the ACS data for internet access analysis.
     
-    def analyze_by_state(self):
-        """Calculate internet and smartphone access statistics by state."""
-        self.log("\nCalculating internet and smartphone access by state...")
-        state_stats = []
-        
-        for state_code in self.state_dim['STATEFIP']:
-            state_internet = self.valid_internet[self.valid_internet['STATEFIP'] == state_code]
-            state_smartphone = self.valid_smartphone[self.valid_smartphone['STATEFIP'] == state_code]
+    Loads the fact table and dimension tables, creates age and income buckets,
+    and filters out invalid internet access records.
+    
+    Args:
+        data_dir (str or Path, optional): Directory containing the star schema data.
+            Defaults to PROJECT_ROOT/data/processed/star_schema.
             
-            if len(state_internet) > 0 and len(state_smartphone) > 0:
-                internet_pct = self.calculate_weighted_percentage(
-                    state_internet, 'PERWT', 'CINETHH'
-                )
-                smartphone_pct = self.calculate_weighted_percentage(
-                    state_smartphone, 'PERWT', 'CISMRTPHN'
-                )
-                population = state_internet['PERWT'].sum()
-                
-                state_stats.append({
-                    'STATEFIP': state_code,
-                    'internet_percentage': internet_pct,
-                    'smartphone_percentage': smartphone_pct,
-                    'population_estimate': population
-                })
-        
-        # Create DataFrame and merge with state names
-        state_stats_df = pd.DataFrame(state_stats)
-        state_stats_df = pd.merge(state_stats_df, self.state_dim, on='STATEFIP', how='left')
-        state_stats_df = state_stats_df.sort_values('internet_percentage', ascending=False)
-        
-        self._print_state_results(state_stats_df)
-        return state_stats_df
+    Returns:
+        tuple: (internet_data, dimension_tables)
+            - internet_data (pd.DataFrame): Prepared fact table with:
+                - Filtered valid internet records
+                - Age buckets
+                - Income buckets
+            - dimension_tables (dict): Dictionary of dimension DataFrames
+    """
+    if data_dir is None:
+        data_dir = PROJECT_ROOT / 'data/processed/star_schema'
+    data_dir = Path(data_dir)
     
-    def analyze_by_education(self):
-        """Calculate internet and smartphone access statistics by education level."""
-        self.log("\nCalculating internet and smartphone access by education level...")
-        educ_stats = []
-        
-        for educ_code in sorted(self.educ_dim['EDUC']):
-            educ_internet = self.valid_internet[self.valid_internet['EDUC'] == educ_code]
-            educ_smartphone = self.valid_smartphone[self.valid_smartphone['EDUC'] == educ_code]
-            
-            if len(educ_internet) > 0 and len(educ_smartphone) > 0:
-                internet_pct = self.calculate_weighted_percentage(
-                    educ_internet, 'PERWT', 'CINETHH'
-                )
-                smartphone_pct = self.calculate_weighted_percentage(
-                    educ_smartphone, 'PERWT', 'CISMRTPHN'
-                )
-                population = educ_internet['PERWT'].sum()
-                
-                educ_stats.append({
-                    'EDUC': educ_code,
-                    'internet_percentage': internet_pct,
-                    'smartphone_percentage': smartphone_pct,
-                    'population_estimate': population
-                })
-        
-        # Create DataFrame and merge with education descriptions
-        educ_stats_df = pd.DataFrame(educ_stats)
-        educ_stats_df = pd.merge(educ_stats_df, self.educ_dim, on='EDUC', how='left')
-        educ_stats_df = educ_stats_df.sort_values('internet_percentage', ascending=False)
-        
-        self._print_education_results(educ_stats_df)
-        return educ_stats_df
+    logging.info(f"Loading data from: {data_dir}")
     
-    def _print_state_results(self, state_stats_df):
-        """Print state-level results in a formatted table."""
-        self.log("\nInternet and Smartphone Access by State:")
-        self.log("=" * 100)
-        self.log(f"{'State':<20}{'Internet %':>12}{'Smartphone %':>15}{'Population Est.':>20}")
-        self.log("-" * 100)
-        for _, row in state_stats_df.iterrows():
-            self.log(f"{row['STATEFIP_value']:<20}{row['internet_percentage']:>11.1f}%"
-                    f"{row['smartphone_percentage']:>14.1f}%{row['population_estimate']:>20,.0f}")
+    try:
+        # Read the fact table
+        internet_data = pd.read_csv(
+            data_dir / 'fact_acs_2023.csv.zip',
+            compression={'method': 'zip', 'archive_name': 'fact_acs_2023.csv'}
+        )
+        
+        # Load all dimension tables into a dictionary
+        dimension_tables = {
+            dim_file.stem.replace('dim_', ''): pd.read_csv(dim_file)
+            for dim_file in data_dir.glob('dim_*.csv')
+        }
+        
+        # Filter for valid internet records (9 indicates missing/invalid)
+        internet_data = internet_data[internet_data['CINETHH'] != 9]
+        
+        # Create age buckets for demographic analysis
+        age_bins = [0, 18, 25, 35, 50, 65, 100]
+        age_labels = ['0-18', '19-25', '26-35', '36-50', '51-65', '65+']
+        internet_data['AGE_BUCKET'] = pd.cut(
+            internet_data['AGE'],
+            bins=age_bins,
+            labels=age_labels
+        )
+        
+        # Create income buckets
+        internet_data['INCTOT_BUCKET'] = create_income_buckets(internet_data['INCTOT'])
+        
+        logging.info(f"Successfully loaded {len(internet_data):,} valid records")
+        return internet_data, dimension_tables
+        
+    except Exception as e:
+        logging.error(f"Error loading data: {str(e)}")
+        raise
+
+def calculate_weighted_access_stats(data_frame, group_col, weight_col='PERWT', access_col='CINETHH'):
+    """Calculate weighted internet access statistics for a grouping variable.
     
-    def _print_education_results(self, educ_stats_df):
-        """Print education-level results in a formatted table."""
-        self.log("\nInternet and Smartphone Access by Education Level:")
-        self.log("=" * 100)
-        self.log(f"{'Education Level':<40}{'Internet %':>12}{'Smartphone %':>15}"
-                f"{'Population Est.':>20}")
-        self.log("-" * 100)
-        for _, row in educ_stats_df.iterrows():
-            self.log(f"{row['EDUC_value']:<40}{row['internet_percentage']:>11.1f}%"
-                    f"{row['smartphone_percentage']:>14.1f}%{row['population_estimate']:>20,.0f}")
+    Uses vectorized operations to compute weighted percentages and population estimates
+    for each unique value in the grouping column.
     
-    def generate_summary_statistics(self, state_stats_df, educ_stats_df):
-        """Generate summary statistics and insights."""
-        self.log("\nKey Findings and Summary Statistics")
-        self.log("=" * 100)
-        
-        # State-level statistics
-        self.log("\nState-Level Statistics:")
-        self.log("-" * 50)
-        self.log(f"National Average Internet Access: {state_stats_df['internet_percentage'].mean():.1f}%")
-        self.log(f"National Average Smartphone Usage: {state_stats_df['smartphone_percentage'].mean():.1f}%")
-        self.log("\nTop 5 States by Internet Access:")
-        for _, row in state_stats_df.head().iterrows():
-            self.log(f"  - {row['STATEFIP_value']}: {row['internet_percentage']:.1f}%")
-        
-        self.log("\nBottom 5 States by Internet Access:")
-        for _, row in state_stats_df.tail().iterrows():
-            self.log(f"  - {row['STATEFIP_value']}: {row['internet_percentage']:.1f}%")
-        
-        # Education-level statistics
-        self.log("\nEducation-Level Statistics:")
-        self.log("-" * 50)
-        self.log("\nInternet Access Range by Education:")
-        self.log(f"  Highest: {educ_stats_df['EDUC_value'].iloc[0]} ({educ_stats_df['internet_percentage'].max():.1f}%)")
-        self.log(f"  Lowest: {educ_stats_df['EDUC_value'].iloc[-1]} ({educ_stats_df['internet_percentage'].min():.1f}%)")
-        
-        # Digital divide insights
-        internet_range = state_stats_df['internet_percentage'].max() - state_stats_df['internet_percentage'].min()
-        self.log("\nDigital Divide Insights:")
-        self.log("-" * 50)
-        self.log(f"State-level digital divide (max - min): {internet_range:.1f} percentage points")
-        self.log(f"Education-level correlation: Strong positive correlation between education and internet access")
-        
-        # Technology adoption patterns
-        self.log("\nTechnology Adoption Patterns:")
-        self.log("-" * 50)
-        states_higher_smartphone = state_stats_df[
-            state_stats_df['smartphone_percentage'] > state_stats_df['internet_percentage']
-        ]
-        self.log(f"States with higher smartphone than internet usage: {len(states_higher_smartphone)}")
+    Args:
+        data_frame (pd.DataFrame): DataFrame containing the analysis data
+        group_col (str): Column name to group by
+        weight_col (str, optional): Column containing weights. Defaults to 'PERWT'.
+        access_col (str, optional): Column indicating internet access. Defaults to 'CINETHH'.
     
-    def save_results(self, state_stats_df, educ_stats_df):
-        """Save analysis results to CSV files and generate report."""
-        # Save CSV results
-        state_file = self.results_dir / 'internet_smartphone_by_state.csv'
-        educ_file = self.results_dir / 'internet_smartphone_by_education.csv'
-        report_file = self.results_dir / 'analysis_report.txt'
-        
-        state_stats_df.to_csv(state_file, index=False)
-        educ_stats_df.to_csv(educ_file, index=False)
-        
-        # Generate summary statistics
-        self.generate_summary_statistics(state_stats_df, educ_stats_df)
-        
-        # Save the complete analysis report
-        with open(report_file, 'w') as f:
-            f.write("Internet and Smartphone Access Analysis Report\n")
-            f.write(f"Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-            f.write("=" * 80 + "\n\n")
-            f.write('\n'.join(self.report_lines))
-        
-        self.log("\nResults saved to:")
-        self.log(f"- {state_file}")
-        self.log(f"- {educ_file}")
-        self.log(f"- {report_file}")
+    Returns:
+        pd.DataFrame: Statistics for each group with columns:
+            - dimension_value: The grouping value
+            - internet_percentage: Weighted percentage with internet access
+            - population_estimate: Weighted population estimate
+    """
+    # Group by the dimension and calculate statistics
+    grouped_stats = data_frame.groupby(group_col).agg({
+        weight_col: 'sum',  # Total weight for population estimate
+        access_col: lambda x: np.average(x == 1, weights=data_frame.loc[x.index, weight_col])
+    }).reset_index()
     
-    def run_analysis(self):
-        """Run the complete analysis pipeline."""
-        try:
-            self.load_data()
-            state_stats = self.analyze_by_state()
-            educ_stats = self.analyze_by_education()
-            self.save_results(state_stats, educ_stats)
-        except Exception as e:
-            self.log(f"An error occurred during analysis: {str(e)}")
+    # Rename columns for clarity
+    grouped_stats.columns = ['dimension_value', 'population_estimate', 'internet_percentage']
+    
+    # Convert percentage to 0-100 scale
+    grouped_stats['internet_percentage'] *= 100
+    
+    return grouped_stats.sort_values('internet_percentage', ascending=False)
+
+def merge_dimension_descriptions(stats_df, dim_table, dim_name):
+    """Merge dimension descriptions with statistics.
+    
+    Args:
+        stats_df (pd.DataFrame): Statistics DataFrame
+        dim_table (pd.DataFrame): Dimension table with descriptions
+        dim_name (str): Name of the dimension
+        
+    Returns:
+        pd.DataFrame: Statistics with merged descriptions
+    """
+    if dim_name not in ['AGE_BUCKET', 'INCTOT_BUCKET']:
+        dim_col = dim_name.upper()
+        value_col = f"{dim_col}_value"
+        
+        if value_col in dim_table.columns:
+            return pd.merge(
+                stats_df,
+                dim_table[[dim_col, value_col]],
+                left_on='dimension_value',
+                right_on=dim_col,
+                how='left'
+            )
+    
+    return stats_df
+
+def create_bar_plot(data, x_col, y_col, title, rotate_labels=45):
+    """Create a bar plot using seaborn.
+    
+    Args:
+        data (pd.DataFrame): Data to plot
+        x_col (str): Column for x-axis
+        y_col (str): Column for y-axis
+        title (str): Plot title
+        rotate_labels (int, optional): Degrees to rotate x-axis labels. Defaults to 45.
+    """
+    plt.figure(figsize=(12, 6))
+    sns.set_style("whitegrid")
+    
+    plot = sns.barplot(
+        data=data,
+        x=x_col,
+        y=y_col,
+        color='skyblue'
+    )
+    
+    plt.title(title)
+    plt.xlabel(x_col.replace('_', ' ').title())
+    plt.ylabel("Internet Access (%)")
+    plt.xticks(rotation=rotate_labels)
+    plt.tight_layout()
+
+def save_dimension_plot(data_frame, dim_name, plots_dir):
+    """Create and save a visualization for a dimension's analysis.
+    
+    Args:
+        data_frame (pd.DataFrame): Analysis results
+        dim_name (str): Name of the dimension
+        plots_dir (Path): Directory to save plots
+    
+    Returns:
+        str: Relative path to the saved plot
+    """
+    # Determine x-axis column and title
+    x_col = 'STATEFIP_value' if dim_name == 'statefip' and 'STATEFIP_value' in data_frame.columns else 'dimension_value'
+    title = f"Internet Access by {dim_name.replace('_', ' ').title()}"
+    
+    # Create appropriate plot type
+    if dim_name == 'statefip':
+        create_bar_plot(data_frame, x_col, 'internet_percentage', title, rotate_labels=90)
+    elif dim_name in ['AGE_BUCKET', 'INCTOT_BUCKET']:
+        create_bar_plot(data_frame, x_col, 'internet_percentage', title, rotate_labels=45)
+    else:
+        create_bar_plot(data_frame, x_col, 'internet_percentage', title, rotate_labels=45)
+    
+    # Save plot
+    plot_path = plots_dir / f"{dim_name}_internet_access.png"
+    plt.savefig(plot_path)
+    plt.close()
+    
+    return f"plots/{plot_path.name}"
+
+def analyze_dimension(internet_data, dim_table, dim_name):
+    """Analyze internet access patterns for a specific dimension.
+    
+    Args:
+        internet_data (pd.DataFrame): Prepared fact table
+        dim_table (pd.DataFrame): Dimension table
+        dim_name (str): Name of the dimension
+        
+    Returns:
+        pd.DataFrame: Analysis results
+    """
+    logging.info(f"Analyzing internet access by {dim_name}")
+    
+    # Use the original column name for grouping
+    group_col = dim_name if dim_name in ['AGE_BUCKET', 'INCTOT_BUCKET'] else dim_name.upper()
+    
+    # Calculate statistics using vectorized operations
+    access_stats = calculate_weighted_access_stats(internet_data, group_col)
+    
+    # Merge with dimension descriptions if available
+    return merge_dimension_descriptions(access_stats, dim_table, dim_name)
+
+def generate_markdown_report(analysis_results, report_file):
+    """Generate a markdown report with analysis results and plots.
+    
+    Args:
+        analysis_results (dict): Dictionary of analysis results by dimension
+        report_file (Path): Path to save the report
+    """
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    report_sections = [
+        "# Internet Access Analysis Report",
+        f"Generated: {timestamp}",
+        "",
+        "## Overview",
+        "Analysis of internet access patterns across various demographic dimensions.",
+        "",
+    ]
+    
+    # Add sections for each dimension
+    for dim_name, results in analysis_results.items():
+        section_title = dim_name.replace('_', ' ').title()
+        report_sections.extend([
+            f"## {section_title} Analysis",
+            "",
+            f"![{section_title} Internet Access](../{results['plot_path']})",
+            "",
+            "### Key Findings",
+            f"- Highest access: {results['highest_access']:.1f}%",
+            f"- Lowest access: {results['lowest_access']:.1f}%",
+            f"- Range: {results['access_range']:.1f} percentage points",
+            "",
+        ])
+    
+    # Write report
+    report_file.parent.mkdir(exist_ok=True)
+    report_file.write_text('\n'.join(report_sections))
+    logging.info(f"Report generated: {report_file}")
 
 def main():
-    """Main function to run the analysis."""
-    analyzer = TechnologyAccessAnalyzer()
-    analyzer.run_analysis()
+    """Main function to run the internet access analysis pipeline."""
+    try:
+        # Create output directories
+        results_dir = PROJECT_ROOT / 'results'
+        plots_dir = results_dir / 'plots'
+        plots_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Load and prepare data
+        internet_data, dimension_tables = load_and_prepare_data()
+        
+        # Define dimensions to analyze
+        dimensions = [
+            'statefip', 'region', 'educ', 'race', 'sex', 'empstat',
+            'language', 'diffeye', 'diffsens', 'diffcare', 'diffrem',
+            'AGE_BUCKET', 'INCTOT_BUCKET'
+        ]
+        
+        # Analyze each dimension
+        analysis_results = {}
+        for dim_name in dimensions:
+            # Get dimension table if available
+            dim_table = dimension_tables.get(dim_name, pd.DataFrame())
+            
+            # Analyze dimension and create visualization
+            results_df = analyze_dimension(internet_data, dim_table, dim_name)
+            plot_path = save_dimension_plot(results_df, dim_name, plots_dir)
+            
+            # Store results
+            analysis_results[dim_name] = {
+                'results': results_df,
+                'plot_path': plot_path,
+                'highest_access': results_df['internet_percentage'].max(),
+                'lowest_access': results_df['internet_percentage'].min(),
+                'access_range': results_df['internet_percentage'].max() - 
+                               results_df['internet_percentage'].min()
+            }
+        
+        # Generate report
+        report_file = results_dir / 'report.md'
+        generate_markdown_report(analysis_results, report_file)
+        
+    except Exception as e:
+        logging.error(f"An error occurred during analysis: {str(e)}")
+        raise
 
 if __name__ == '__main__':
     main() 
