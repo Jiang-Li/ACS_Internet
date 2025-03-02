@@ -1,6 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Virtual environments
+venv/
+env/
+.env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.cursorrules
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Raw data files
+data/raw/*.csv
+# Ignore fact table due to size but keep dimension tables
+data/processed/star_schema/fact_*.csv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
 # Large data files
 data/processed/star_schema/*.csv
-data/raw/*.csv
 star_schema/*.csv
 
 # Python
@@ -18,22 +51,13 @@ data/processed/star_schema/fact_acs_2023.csv
 !*.csv.zip
 !*.zip
 
-# Distribution / packaging
-dist/
-build/
-*.egg-info/
+# IDE configuration
+.installed.cfg
+*.egg
 
-# Virtual environments
-venv/
+# Environment
+.env
+.venv
 env/
-.env/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db 
+venv/
+ENV/ 
