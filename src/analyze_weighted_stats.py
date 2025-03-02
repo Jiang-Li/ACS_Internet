@@ -293,7 +293,7 @@ def generate_markdown_report(analysis_results, report_file):
         report_sections.extend([
             f"## {section_title} Analysis",
             "",
-            f"![{section_title} Internet Access](../{results['plot_path']})",
+            f"![{section_title} Internet Access]({results['plot_path']})",
             "",
             "### Key Findings",
             f"- Highest access: {results['highest_access']:.1f}%",

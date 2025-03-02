@@ -1,12 +1,12 @@
 # Internet Access Analysis Report
-Generated: 2025-03-02 10:36:14
+Generated: 2025-03-02 10:45:05
 
 ## Overview
 Analysis of internet access patterns across various demographic dimensions.
 
 ## Statefip Analysis
 
-![Statefip Internet Access](../plots/statefip_internet_access.png)
+![Statefip Internet Access](plots/statefip_internet_access.png)
 
 ### Key Findings
 - Highest access: 94.5%
@@ -15,7 +15,7 @@ Analysis of internet access patterns across various demographic dimensions.
 
 ## Region Analysis
 
-![Region Internet Access](../plots/region_internet_access.png)
+![Region Internet Access](plots/region_internet_access.png)
 
 ### Key Findings
 - Highest access: 93.8%
@@ -24,7 +24,7 @@ Analysis of internet access patterns across various demographic dimensions.
 
 ## Educ Analysis
 
-![Educ Internet Access](../plots/educ_internet_access.png)
+![Educ Internet Access](plots/educ_internet_access.png)
 
 ### Key Findings
 - Highest access: 97.0%
@@ -33,7 +33,7 @@ Analysis of internet access patterns across various demographic dimensions.
 
 ## Race Analysis
 
-![Race Internet Access](../plots/race_internet_access.png)
+![Race Internet Access](plots/race_internet_access.png)
 
 ### Key Findings
 - Highest access: 95.0%
@@ -42,7 +42,7 @@ Analysis of internet access patterns across various demographic dimensions.
 
 ## Sex Analysis
 
-![Sex Internet Access](../plots/sex_internet_access.png)
+![Sex Internet Access](plots/sex_internet_access.png)
 
 ### Key Findings
 - Highest access: 92.5%
@@ -51,7 +51,7 @@ Analysis of internet access patterns across various demographic dimensions.
 
 ## Empstat Analysis
 
-![Empstat Internet Access](../plots/empstat_internet_access.png)
+![Empstat Internet Access](plots/empstat_internet_access.png)
 
 ### Key Findings
 - Highest access: 96.2%
@@ -60,7 +60,7 @@ Analysis of internet access patterns across various demographic dimensions.
 
 ## Language Analysis
 
-![Language Internet Access](../plots/language_internet_access.png)
+![Language Internet Access](plots/language_internet_access.png)
 
 ### Key Findings
 - Highest access: 96.9%
@@ -69,7 +69,7 @@ Analysis of internet access patterns across various demographic dimensions.
 
 ## Diffeye Analysis
 
-![Diffeye Internet Access](../plots/diffeye_internet_access.png)
+![Diffeye Internet Access](plots/diffeye_internet_access.png)
 
 ### Key Findings
 - Highest access: 92.5%
@@ -78,7 +78,7 @@ Analysis of internet access patterns across various demographic dimensions.
 
 ## Diffsens Analysis
 
-![Diffsens Internet Access](../plots/diffsens_internet_access.png)
+![Diffsens Internet Access](plots/diffsens_internet_access.png)
 
 ### Key Findings
 - Highest access: 92.7%
@@ -87,7 +87,7 @@ Analysis of internet access patterns across various demographic dimensions.
 
 ## Diffcare Analysis
 
-![Diffcare Internet Access](../plots/diffcare_internet_access.png)
+![Diffcare Internet Access](plots/diffcare_internet_access.png)
 
 ### Key Findings
 - Highest access: 95.9%
@@ -96,7 +96,7 @@ Analysis of internet access patterns across various demographic dimensions.
 
 ## Diffrem Analysis
 
-![Diffrem Internet Access](../plots/diffrem_internet_access.png)
+![Diffrem Internet Access](plots/diffrem_internet_access.png)
 
 ### Key Findings
 - Highest access: 95.9%
@@ -105,7 +105,7 @@ Analysis of internet access patterns across various demographic dimensions.
 
 ## Age Bucket Analysis
 
-![Age Bucket Internet Access](../plots/AGE_BUCKET_internet_access.png)
+![Age Bucket Internet Access](plots/AGE_BUCKET_internet_access.png)
 
 ### Key Findings
 - Highest access: 95.1%
@@ -114,7 +114,7 @@ Analysis of internet access patterns across various demographic dimensions.
 
 ## Inctot Bucket Analysis
 
-![Inctot Bucket Internet Access](../plots/INCTOT_BUCKET_internet_access.png)
+![Inctot Bucket Internet Access](plots/INCTOT_BUCKET_internet_access.png)
 
 ### Key Findings
 - Highest access: 96.8%
