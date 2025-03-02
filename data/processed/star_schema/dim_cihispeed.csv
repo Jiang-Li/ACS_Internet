@@ -1,0 +1,12 @@
+CIHISPEED,CIHISPEED_value,CIHISPEED_desc
+0,N/A (GQ),"Broadband (high speed) Internet service such as cable, fiber optic, or DSL service"
+10,"Yes (Cable modem, fiber optic or DSL service)","Broadband (high speed) Internet service such as cable, fiber optic, or DSL service"
+11,Cable modem only,"Broadband (high speed) Internet service such as cable, fiber optic, or DSL service"
+12,Fiber optic only,"Broadband (high speed) Internet service such as cable, fiber optic, or DSL service"
+13,DSL service only,"Broadband (high speed) Internet service such as cable, fiber optic, or DSL service"
+14,Cable modem + Fiber optic,"Broadband (high speed) Internet service such as cable, fiber optic, or DSL service"
+15,Cable modem + DSL service,"Broadband (high speed) Internet service such as cable, fiber optic, or DSL service"
+16,Fiber optic + DSL service,"Broadband (high speed) Internet service such as cable, fiber optic, or DSL service"
+17,"Cable modem, Fiber optic and DSL service","Broadband (high speed) Internet service such as cable, fiber optic, or DSL service"
+20,No,"Broadband (high speed) Internet service such as cable, fiber optic, or DSL service"
+88,Suppressed for data year 2023 for select PUMAs,"Broadband (high speed) Internet service such as cable, fiber optic, or DSL service"

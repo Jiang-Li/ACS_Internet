@@ -1,0 +1,6 @@
+EMPSTAT,EMPSTAT_value,EMPSTAT_desc
+0,N/A,Employment status [general version]
+1,Employed,Employment status [general version]
+2,Unemployed,Employment status [general version]
+3,Not in labor force,Employment status [general version]
+9,Unknown/Illegible,Employment status [general version]

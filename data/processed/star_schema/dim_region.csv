@@ -1,0 +1,18 @@
+REGION,REGION_value,REGION_desc
+11,New England Division,Census region and division
+12,Middle Atlantic Division,Census region and division
+13,Mixed Northeast Divisions (1970 Metro),Census region and division
+21,East North Central Div.,Census region and division
+22,West North Central Div.,Census region and division
+23,Mixed Midwest Divisions (1970 Metro),Census region and division
+31,South Atlantic Division,Census region and division
+32,East South Central Div.,Census region and division
+33,West South Central Div.,Census region and division
+34,Mixed Southern Divisions (1970 Metro),Census region and division
+41,Mountain Division,Census region and division
+42,Pacific Division,Census region and division
+43,Mixed Western Divisions (1970 Metro),Census region and division
+91,Military/Military reservations,Census region and division
+92,PUMA boundaries cross state lines-1% sample,Census region and division
+97,State not identified,Census region and division
+99,Not identified,Census region and division
