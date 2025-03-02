@@ -216,6 +216,49 @@ The analysis generates three main files in the `results` directory:
    - Digital divide metrics
    - Education level correlations
 
+## Internet Access Analysis
+
+The project includes a comprehensive analysis of internet access patterns using the `analyze_weighted_stats.py` script. This analysis:
+
+1. **Calculates Weighted Statistics**: Uses person weights (PERWT) to compute representative statistics across multiple dimensions:
+   - Geographic (state, region)
+   - Demographic (race, sex, age)
+   - Socioeconomic (education, employment, income)
+   - Disability status (cognitive, sensory, self-care difficulties)
+   - Language
+
+2. **Generates Visualizations**: Creates bar plots for each dimension showing:
+   - Internet access percentages
+   - Population-weighted estimates
+   - Comparative analysis across categories
+
+3. **Produces Analysis Report**: Generates a markdown report (`results/report.md`) containing:
+   - Key findings for each dimension
+   - Access rate ranges and variations
+   - Visual representations of access patterns
+   - Timestamp of analysis
+
+### Running the Analysis
+
+To run the internet access analysis:
+```bash
+python src/analyze_weighted_stats.py
+```
+
+This will:
+1. Load the star schema data
+2. Calculate weighted statistics
+3. Generate visualizations in `results/plots/`
+4. Create a comprehensive report in `results/report.md`
+
+### Analysis Features
+
+- **Income Analysis**: Creates income buckets using quantile-based categorization
+- **Age Demographics**: Groups age data into meaningful buckets for analysis
+- **Weighted Statistics**: Uses ACS person weights for accurate population representation
+- **Visual Analytics**: Generates clear, informative bar plots for each dimension
+- **Comprehensive Reporting**: Automated markdown report generation with key findings
+
 ## Methodology
 
 The analysis uses person weights (PERWT) from the ACS to calculate representative statistics:
